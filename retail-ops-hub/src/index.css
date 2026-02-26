@@ -1,0 +1,469 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  /* ============================================
+     LIGHT THEME (DEFAULT - RETAIL SAFE)
+     High legibility for illuminated environments
+     ============================================ */
+  :root,
+  .theme-light {
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Teal Primary - Trust & Operations */
+    --primary: 173 58% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 20% 93%;
+    --secondary-foreground: 222 47% 20%;
+
+    --muted: 210 20% 95%;
+    --muted-foreground: 215 16% 43%;
+
+    --accent: 210 20% 90%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 85%;
+    --input: 214 20% 88%;
+    --ring: 173 58% 35%;
+
+    --radius: 0.5rem;
+
+    /* Status Colors - Semantic (Light) */
+    --status-online: 142 71% 35%;
+    --status-offline: 0 72% 45%;
+    --status-warning: 38 92% 40%;
+    --status-pending: 217 91% 50%;
+    --status-success: 142 71% 35%;
+    --status-error: 0 72% 45%;
+
+    /* Risk Levels (Light) */
+    --risk-low: 142 71% 35%;
+    --risk-medium: 38 92% 40%;
+    --risk-high: 0 72% 45%;
+    --risk-critical: 330 81% 50%;
+
+    /* Action Categories (Light) */
+    --action-observation: 217 91% 50%;
+    --action-diagnostic: 173 58% 35%;
+    --action-operational: 38 92% 40%;
+    --action-critical: 0 72% 45%;
+
+    /* Action Lifecycle Status Colors (Light) */
+    --status-draft: 215 16% 50%;
+    --status-queued: 262 83% 50%;
+    --status-progress: 38 92% 40%;
+    --status-blocked: 330 81% 50%;
+    --status-cancelled: 215 16% 50%;
+
+    /* Data Mode Indicators */
+    --mode-demo: 38 92% 40%;
+    --mode-api: 142 71% 35%;
+
+    /* Gradients (Light) */
+    --gradient-primary: linear-gradient(135deg, hsl(173 58% 35%), hsl(173 58% 28%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 20% 98%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 20% 98%), hsl(210 20% 95%));
+
+    /* Shadows (Light) */
+    --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.08), 0 1px 2px hsl(0 0% 0% / 0.06);
+    --shadow-elevated: 0 4px 12px hsl(0 0% 0% / 0.1), 0 2px 4px hsl(0 0% 0% / 0.06);
+    --shadow-glow: 0 0 15px hsl(173 58% 35% / 0.12);
+
+    /* Sidebar (Light) */
+    --sidebar-background: 210 20% 97%;
+    --sidebar-foreground: 222 47% 20%;
+    --sidebar-primary: 173 58% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 20% 92%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 20% 88%;
+    --sidebar-ring: 173 58% 35%;
+  }
+
+  /* ============================================
+     DARK THEME (OPERATIONAL / NOCTURNAL)
+     Reduced glare for night shifts
+     ============================================ */
+  .theme-dark {
+    --background: 222 47% 6%;
+    --foreground: 210 20% 95%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 20% 95%;
+
+    /* Teal Primary - Trust & Operations */
+    --primary: 173 58% 39%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 222 30% 12%;
+    --muted-foreground: 215 16% 55%;
+
+    --accent: 222 30% 16%;
+    --accent-foreground: 210 20% 95%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 222 30% 18%;
+    --input: 222 30% 15%;
+    --ring: 173 58% 39%;
+
+    /* Status Colors - Semantic (Dark) */
+    --status-online: 142 71% 45%;
+    --status-offline: 0 72% 51%;
+    --status-warning: 38 92% 50%;
+    --status-pending: 217 91% 60%;
+    --status-success: 142 71% 45%;
+    --status-error: 0 72% 51%;
+
+    /* Risk Levels (Dark) */
+    --risk-low: 142 71% 45%;
+    --risk-medium: 38 92% 50%;
+    --risk-high: 0 72% 51%;
+    --risk-critical: 330 81% 60%;
+
+    /* Action Categories (Dark) */
+    --action-observation: 217 91% 60%;
+    --action-diagnostic: 173 58% 39%;
+    --action-operational: 38 92% 50%;
+    --action-critical: 0 72% 51%;
+
+    /* Action Lifecycle Status Colors (Dark) */
+    --status-draft: 215 16% 55%;
+    --status-queued: 262 83% 58%;
+    --status-progress: 38 92% 50%;
+    --status-blocked: 330 81% 60%;
+    --status-cancelled: 215 16% 55%;
+
+    /* Data Mode Indicators */
+    --mode-demo: 38 92% 50%;
+    --mode-api: 142 71% 45%;
+
+    /* Gradients (Dark) */
+    --gradient-primary: linear-gradient(135deg, hsl(173 58% 39%), hsl(173 58% 30%));
+    --gradient-card: linear-gradient(180deg, hsl(222 47% 10%), hsl(222 47% 7%));
+    --gradient-hero: linear-gradient(135deg, hsl(222 47% 8%), hsl(222 47% 4%));
+
+    /* Shadows (Dark) */
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -2px hsl(0 0% 0% / 0.2);
+    --shadow-elevated: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -4px hsl(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 20px hsl(173 58% 39% / 0.15);
+
+    /* Sidebar (Dark) */
+    --sidebar-background: 222 47% 5%;
+    --sidebar-foreground: 210 20% 85%;
+    --sidebar-primary: 173 58% 39%;
+    --sidebar-primary-foreground: 210 20% 98%;
+    --sidebar-accent: 222 30% 12%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 222 30% 15%;
+    --sidebar-ring: 173 58% 39%;
+  }
+
+  /* ============================================
+     HIGH CONTRAST THEME (ACCESSIBILITY / INCIDENTS)
+     Maximum visibility for stress situations
+     ============================================ */
+  .theme-high-contrast {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
+
+    /* High visibility primary */
+    --primary: 180 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 0 0% 0%;
+
+    --border: 0 0% 35%;
+    --input: 0 0% 20%;
+    --ring: 180 100% 50%;
+
+    /* Status Colors - Maximum Contrast */
+    --status-online: 120 100% 45%;
+    --status-offline: 0 100% 55%;
+    --status-warning: 45 100% 50%;
+    --status-pending: 210 100% 60%;
+    --status-success: 120 100% 45%;
+    --status-error: 0 100% 55%;
+
+    /* Risk Levels - Maximum Contrast */
+    --risk-low: 120 100% 45%;
+    --risk-medium: 45 100% 50%;
+    --risk-high: 0 100% 55%;
+    --risk-critical: 300 100% 60%;
+
+    /* Action Categories - Maximum Contrast */
+    --action-observation: 210 100% 60%;
+    --action-diagnostic: 180 100% 50%;
+    --action-operational: 45 100% 50%;
+    --action-critical: 0 100% 55%;
+
+    /* Action Lifecycle Status Colors - Maximum Contrast */
+    --status-draft: 0 0% 60%;
+    --status-queued: 270 100% 65%;
+    --status-progress: 45 100% 50%;
+    --status-blocked: 300 100% 60%;
+    --status-cancelled: 0 0% 60%;
+
+    /* Data Mode Indicators */
+    --mode-demo: 45 100% 50%;
+    --mode-api: 120 100% 45%;
+
+    /* Gradients (High Contrast - flat) */
+    --gradient-primary: linear-gradient(135deg, hsl(180 100% 50%), hsl(180 100% 40%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 8%), hsl(0 0% 3%));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 5%), hsl(0 0% 0%));
+
+    /* Shadows - More prominent borders instead */
+    --shadow-card: 0 0 0 1px hsl(0 0% 35%);
+    --shadow-elevated: 0 0 0 2px hsl(180 100% 50% / 0.3);
+    --shadow-glow: 0 0 20px hsl(180 100% 50% / 0.25);
+
+    /* Sidebar (High Contrast) */
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 180 100% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 35%;
+    --sidebar-ring: 180 100% 50%;
+  }
+
+  /* Legacy .dark class support */
+  .dark {
+    /* Inherits from theme-dark when applied */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  /* Theme transition for smooth mode switching */
+  :root,
+  .theme-light,
+  .theme-dark,
+  .theme-high-contrast {
+    transition: 
+      background-color 200ms ease-out,
+      color 200ms ease-out,
+      border-color 200ms ease-out,
+      box-shadow 200ms ease-out;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Monospace for technical data */
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Status Indicators */
+  .status-dot {
+    @apply w-2 h-2 rounded-full animate-pulse;
+  }
+  
+  .status-online {
+    @apply bg-[hsl(var(--status-online))];
+    box-shadow: 0 0 8px hsl(var(--status-online) / 0.5);
+  }
+  
+  .status-offline {
+    @apply bg-[hsl(var(--status-offline))];
+    animation: none;
+  }
+  
+  .status-warning {
+    @apply bg-[hsl(var(--status-warning))];
+  }
+
+  /* Metric Cards */
+  .metric-card {
+    @apply bg-card border border-border rounded-lg p-4;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .metric-card:hover {
+    @apply border-primary/30;
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Risk Badges */
+  .risk-low {
+    @apply bg-[hsl(var(--risk-low)/0.15)] text-[hsl(var(--risk-low))] border-[hsl(var(--risk-low)/0.3)];
+  }
+
+  .risk-medium {
+    @apply bg-[hsl(var(--risk-medium)/0.15)] text-[hsl(var(--risk-medium))] border-[hsl(var(--risk-medium)/0.3)];
+  }
+
+  .risk-high {
+    @apply bg-[hsl(var(--risk-high)/0.15)] text-[hsl(var(--risk-high))] border-[hsl(var(--risk-high)/0.3)];
+  }
+
+  .risk-critical {
+    @apply bg-[hsl(var(--risk-critical)/0.15)] text-[hsl(var(--risk-critical))] border-[hsl(var(--risk-critical)/0.3)];
+  }
+
+  /* Action Category Badges */
+  .action-observation {
+    @apply bg-[hsl(var(--action-observation)/0.15)] text-[hsl(var(--action-observation))] border-[hsl(var(--action-observation)/0.3)];
+  }
+
+  .action-diagnostic {
+    @apply bg-[hsl(var(--action-diagnostic)/0.15)] text-[hsl(var(--action-diagnostic))] border-[hsl(var(--action-diagnostic)/0.3)];
+  }
+
+  .action-operational {
+    @apply bg-[hsl(var(--action-operational)/0.15)] text-[hsl(var(--action-operational))] border-[hsl(var(--action-operational)/0.3)];
+  }
+
+  .action-critical {
+    @apply bg-[hsl(var(--action-critical)/0.15)] text-[hsl(var(--action-critical))] border-[hsl(var(--action-critical)/0.3)];
+  }
+
+  /* Action Lifecycle Status Pills */
+  .status-draft {
+    @apply bg-[hsl(var(--status-draft)/0.15)] text-[hsl(var(--status-draft))] border-[hsl(var(--status-draft)/0.3)];
+  }
+
+  .status-pending {
+    @apply bg-[hsl(var(--status-pending)/0.15)] text-[hsl(var(--status-pending))] border-[hsl(var(--status-pending)/0.3)];
+  }
+
+  .status-queued {
+    @apply bg-[hsl(var(--status-queued)/0.15)] text-[hsl(var(--status-queued))] border-[hsl(var(--status-queued)/0.3)];
+  }
+
+  .status-progress {
+    @apply bg-[hsl(var(--status-progress)/0.15)] text-[hsl(var(--status-progress))] border-[hsl(var(--status-progress)/0.3)];
+  }
+
+  .status-success {
+    @apply bg-[hsl(var(--status-success)/0.15)] text-[hsl(var(--status-success))] border-[hsl(var(--status-success)/0.3)];
+  }
+
+  .status-failed {
+    @apply bg-[hsl(var(--status-error)/0.15)] text-[hsl(var(--status-error))] border-[hsl(var(--status-error)/0.3)];
+  }
+
+  .status-blocked {
+    @apply bg-[hsl(var(--status-blocked)/0.15)] text-[hsl(var(--status-blocked))] border-[hsl(var(--status-blocked)/0.3)];
+  }
+
+  .status-cancelled {
+    @apply bg-[hsl(var(--status-cancelled)/0.15)] text-[hsl(var(--status-cancelled))] border-[hsl(var(--status-cancelled)/0.3)];
+  }
+
+  /* Data Table Rows */
+  .data-row {
+    @apply border-b border-border/50 hover:bg-accent/50 transition-colors;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+
+  /* Disable transitions during theme load to prevent flash */
+  .theme-loading,
+  .theme-loading * {
+    transition: none !important;
+  }
+
+  /* High contrast focus states */
+  .theme-high-contrast *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-[hsl(var(--ring))];
+  }
+}
+
+@layer utilities {
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.2);
+  }
+
+  .glow-success {
+    box-shadow: 0 0 12px hsl(var(--status-success) / 0.3);
+  }
+
+  .glow-error {
+    box-shadow: 0 0 12px hsl(var(--status-error) / 0.3);
+  }
+
+  /* Fade animations */
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+}
