@@ -1,0 +1,19 @@
+retail-ops-backend
+│
+├── server.js
+├── config
+│   └── rabbitmq.js
+│
+├── routes
+│   └── chat.routes.js
+│
+├── controllers
+│   └── chat.controller.js
+│
+├── services
+│   └── rabbitmq.service.js
+│
+├── workers
+│   └── chat.worker.js
+│
+└── package.json

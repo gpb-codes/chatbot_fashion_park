@@ -38,9 +38,25 @@ export default function ExecutionDetailPage() {
 
   const handleRetry = async () => {
     if (!id) return;
+
     try {
+
+      await fetch("http://localhost:3000/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          type: "execution_retry",
+          executionId: id,
+          timestamp: new Date()
+        })
+      });
+
       await retryMutation.mutateAsync({ id });
+
       toast.success('Reintento iniciado correctamente');
+
     } catch (err) {
       toast.error('Error al reintentar la ejecución');
     }
@@ -48,13 +64,30 @@ export default function ExecutionDetailPage() {
 
   const handleCancel = async () => {
     if (!id || !cancelReason.trim()) return;
+
     try {
+
+      await fetch("http://localhost:3000/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          type: "execution_cancel",
+          executionId: id,
+          reason: cancelReason,
+          timestamp: new Date()
+        })
+      });
+
       await cancelMutation.mutateAsync({ 
         id, 
         request: { reason: cancelReason } 
       });
+
       toast.success('Ejecución cancelada');
       setCancelReason('');
+
     } catch (err) {
       toast.error('Error al cancelar la ejecución');
     }
@@ -67,7 +100,7 @@ export default function ExecutionDetailPage() {
   return (
     <MainLayout title="Detalle de Ejecución" subtitle={id}>
       <div className="space-y-6">
-        {/* Header */}
+
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Button 
@@ -78,10 +111,12 @@ export default function ExecutionDetailPage() {
             >
               <ArrowLeft className="h-5 w-5" />
             </Button>
+
             <div>
               <h1 className="text-2xl font-bold text-foreground">
                 Detalle de Ejecución
               </h1>
+
               {id && (
                 <p className="text-sm text-muted-foreground font-mono">
                   {id}
@@ -91,6 +126,7 @@ export default function ExecutionDetailPage() {
           </div>
 
           <div className="flex items-center gap-2">
+
             <Button
               variant="outline"
               size="sm"
@@ -109,44 +145,64 @@ export default function ExecutionDetailPage() {
                     Reintentar
                   </Button>
                 </AlertDialogTrigger>
+
                 <AlertDialogContent>
                   <AlertDialogHeader>
-                    <AlertDialogTitle>¿Reintentar ejecución?</AlertDialogTitle>
+                    <AlertDialogTitle>
+                      ¿Reintentar ejecución?
+                    </AlertDialogTitle>
+
                     <AlertDialogDescription>
                       Se creará una nueva ejecución con los mismos parámetros.
                       La ejecución anterior permanecerá en el historial.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
+
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogCancel>
+                      Cancelar
+                    </AlertDialogCancel>
+
                     <AlertDialogAction 
                       onClick={handleRetry}
                       disabled={retryMutation.isPending}
                     >
                       {retryMutation.isPending ? 'Reintentando...' : 'Reintentar'}
                     </AlertDialogAction>
+
                   </AlertDialogFooter>
                 </AlertDialogContent>
+
               </AlertDialog>
             )}
 
             {canCancel && (
               <AlertDialog>
+
                 <AlertDialogTrigger asChild>
                   <Button variant="destructive" size="sm">
                     <XCircle className="h-4 w-4 mr-2" />
                     Cancelar
                   </Button>
                 </AlertDialogTrigger>
+
                 <AlertDialogContent>
+
                   <AlertDialogHeader>
-                    <AlertDialogTitle>¿Cancelar ejecución?</AlertDialogTitle>
+                    <AlertDialogTitle>
+                      ¿Cancelar ejecución?
+                    </AlertDialogTitle>
+
                     <AlertDialogDescription>
                       Esta acción no se puede deshacer. La ejecución será marcada como cancelada.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
+
                   <div className="py-4">
-                    <Label htmlFor="cancel-reason">Motivo de cancelación</Label>
+                    <Label htmlFor="cancel-reason">
+                      Motivo de cancelación
+                    </Label>
+
                     <Textarea
                       id="cancel-reason"
                       placeholder="Ingresa el motivo de la cancelación..."
@@ -155,10 +211,15 @@ export default function ExecutionDetailPage() {
                       className="mt-2"
                     />
                   </div>
+
                   <AlertDialogFooter>
-                    <AlertDialogCancel onClick={() => setCancelReason('')}>
+
+                    <AlertDialogCancel
+                      onClick={() => setCancelReason('')}
+                    >
                       Volver
                     </AlertDialogCancel>
+
                     <AlertDialogAction 
                       onClick={handleCancel}
                       disabled={cancelMutation.isPending || !cancelReason.trim()}
@@ -166,14 +227,17 @@ export default function ExecutionDetailPage() {
                     >
                       {cancelMutation.isPending ? 'Cancelando...' : 'Confirmar cancelación'}
                     </AlertDialogAction>
+
                   </AlertDialogFooter>
+
                 </AlertDialogContent>
+
               </AlertDialog>
             )}
+
           </div>
         </div>
 
-        {/* Content */}
         {isLoading && (
           <div className="space-y-4">
             <Skeleton className="h-20 w-full" />
@@ -185,22 +249,27 @@ export default function ExecutionDetailPage() {
         {error && (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <AlertTriangle className="h-12 w-12 text-status-error mb-4" />
+
             <h2 className="text-lg font-semibold text-foreground mb-2">
               Error al cargar la ejecución
             </h2>
+
             <p className="text-sm text-muted-foreground mb-4">
-              No se pudo obtener la información de la ejecución. 
+              No se pudo obtener la información de la ejecución.
               Verifica que el ID sea correcto.
             </p>
+
             <Button variant="outline" onClick={() => refetch()}>
               Reintentar
             </Button>
+
           </div>
         )}
 
         {execution && (
           <ExecutionDetail execution={execution} />
         )}
+
       </div>
     </MainLayout>
   );
